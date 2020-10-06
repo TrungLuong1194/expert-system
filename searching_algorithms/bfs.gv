@@ -1,0 +1,17 @@
+// BFS
+digraph {
+	node [shape=circle size=8.5]
+	a -> e
+	a -> g
+	b -> a
+	b -> c
+	d -> c
+	e -> a
+	e -> f
+	g -> a
+	g -> e
+	g -> h
+	h -> i
+	i -> h
+	i -> c
+}
