@@ -1,5 +1,7 @@
 def get_index_comma(string):
-    # Return index of commas in string
+    """
+    Return index of commas in string
+    """
 
     index_list = list()
     # Count open parentheses
@@ -17,7 +19,10 @@ def get_index_comma(string):
 
 
 def is_variable(expr):
-    # Check if expression is variable
+    """
+    Check if expression is variable
+    """
+
     for i in expr:
         if i == '(':
             return False
@@ -26,12 +31,14 @@ def is_variable(expr):
 
 
 def process_expression(expr):
-    # input: - expression:
-    #        'Q(a, g(x, b), f(y))'
-    # return: - predicate symbol:
-    #         Q
-    #         - list of arguments
-    #         ['a', 'g(x, b)', 'f(y)']
+    """
+    input:  - expression:
+            'Q(a, g(x, b), f(y))'
+    return: - predicate symbol:
+            Q
+            - list of arguments
+            ['a', 'g(x, b)', 'f(y)']
+    """
 
     # Remove space in expression
     expr = expr.replace(' ', '')
@@ -68,10 +75,12 @@ def process_expression(expr):
 
 
 def get_arg_list(expr):
-    # input: - expression:
-    #        'Q(a, g(x, b), f(y))'
-    # return: full list of arguments:
-    #         ['a', 'x', 'b', 'y']
+    """
+    input:  expression:
+            'Q(a, g(x, b), f(y))'
+    return: full list of arguments:
+            ['a', 'x', 'b', 'y']
+    """
 
     _, arg_list = process_expression(expr)
 
@@ -92,7 +101,9 @@ def get_arg_list(expr):
 
 
 def check_occurs(var, expr):
-    # Check if var occurs in expr
+    """
+    Check if var occurs in expr
+    """
 
     arg_list = get_arg_list(expr)
     if var in arg_list:
@@ -102,30 +113,32 @@ def check_occurs(var, expr):
 
 
 def unify(expr1, expr2):
-    # Unification Algorithm
-    #
-    # Step 1: If Ψ1 or Ψ2 is a variable or constant, then:
-    #           a, If Ψ1 or Ψ2 are identical, then return NULL.
-    #           b, Else if Ψ1 is a variable:
-    #               - then if Ψ1 occurs in Ψ2, then return False
-    #               - Else return (Ψ2 / Ψ1)
-    #           c, Else if Ψ2 is a variable:
-    #               - then if Ψ2 occurs in Ψ1, then return False
-    #               - Else return (Ψ1 / Ψ2)
-    #           d, Else return False
-    #
-    # Step 2: If the initial Predicate symbol in Ψ1 and Ψ2 are not same, then return False.
-    #
-    # Step 3: IF Ψ1 and Ψ2 have a different number of arguments, then return False.
-    #
-    # Step 4: Create Substitution list.
-    #
-    # Step 5: For i=1 to the number of elements in Ψ1.
-    #           a, Call Unify function with the ith element of Ψ1 and ith element of Ψ2, and put the result into S.
-    #           b, If S = False then returns False
-    #           c, If S ≠ Null then append to Substitution list
-    #
-    # Step 6: Return Substitution list.
+    """
+    Unification Algorithm
+
+    Step 1: If Ψ1 or Ψ2 is a variable or constant, then:
+              a, If Ψ1 or Ψ2 are identical, then return NULL.
+              b, Else if Ψ1 is a variable:
+                  - then if Ψ1 occurs in Ψ2, then return False
+                  - Else return (Ψ2 / Ψ1)
+              c, Else if Ψ2 is a variable:
+                  - then if Ψ2 occurs in Ψ1, then return False
+                  - Else return (Ψ1 / Ψ2)
+              d, Else return False
+
+    Step 2: If the initial Predicate symbol in Ψ1 and Ψ2 are not same, then return False.
+
+    Step 3: IF Ψ1 and Ψ2 have a different number of arguments, then return False.
+
+    Step 4: Create Substitution list.
+
+    Step 5: For i=1 to the number of elements in Ψ1.
+              a, Call Unify function with the ith element of Ψ1 and ith element of Ψ2, and put the result into S.
+              b, If S = False then returns False
+              c, If S ≠ Null then append to Substitution list
+
+    Step 6: Return Substitution list.
+    """
 
     # Step 1:
     if is_variable(expr1) and is_variable(expr2):
